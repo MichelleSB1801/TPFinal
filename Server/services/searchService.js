@@ -37,7 +37,8 @@ self.getquery = function(query) {
 					'decimals': decimales
 				},
 				'picture': result.thumbnail,
-				'condition': result.condition,
+                'condition': result.condition,
+                'address': result.address.state_name,
 				'free_shipping': result.shipping.free_shipping
             })
             //console.log(result + 'hola soy un result')

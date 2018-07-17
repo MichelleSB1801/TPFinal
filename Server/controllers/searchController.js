@@ -41,6 +41,7 @@ self.getproduct = function (req, res) {
 					'condition': result.condition,
 					'free_shipping': result.shipping.free_shipping,
 					'sold_quantity': result.sold_quantity,
+					'address': result.address.state_name,
 					'description': data.plain_text
 				}
 			}
