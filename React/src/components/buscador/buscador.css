@@ -1,10 +1,45 @@
-.list_container{
-	width: 98%;
-	margin: auto;
-	background-color: rgb(216, 223, 228);
-	padding-top: 20px;
-	padding-bottom: 20px;
-	display: flex;
-	flex-direction: column;
-	align-items: center
+.searchBar {
+    width: 100%;
+    background-color: rgb(1, 152, 223);
+    display: flex;
+    justify-content: center;
+    padding-top:10px;
+    padding-bottom: 10px; 
+}
+.logoBar{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: white
+}
+.inputBar{
+    width: 60%;
+}
+.inputBar input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    padding-left: 10px;
+}
+.inputBar input[placeholder] {
+    font-size: 18px;
+ }
+ input:focus{
+    outline: none;
+}
+
+.buttonBar{
+    width: 32px;
+    height: 32px;
+    background-color: #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttonBar img{
+    height: 60%;
+    width: 60%;
 }

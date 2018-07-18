@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
-import Buscador from './components/buscador/buscador'
+import './SearchResults.css';
+import SearchResults from './components/SearchResults/SearchResults'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Buscador />
+        <SearchResults />
       </div>
     );
   }
