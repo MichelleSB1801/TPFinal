@@ -1,0 +1,55 @@
+.ItemDescrip{
+    width: 80%;
+    height: auto;
+    margin: auto;
+    display: flex;
+    background-color: white
+}
+.descrip_img_txt{
+    width: 680px;
+    display: flex;
+    flex-direction: column
+}
+.descrip_img_txt img{
+    width: 680px;
+    height: 680px;
+}
+.descrip_img_txt{
+    padding-left: 32px;
+    text-align: left;
+    margin-top: 0%;
+    font-size: 16px
+}
+h2{
+    font-size: 28px
+}
+.descrip_quantity{
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+.descrip_info{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-right: 32px;
+    padding-top: 32px;
+}
+.descrip_price{
+    font-size: 46px;
+    margin-bottom: 32px
+}
+.descrip_title{
+    font-size: 24px;
+    margin-bottom: 32px
+}
+.buy_button{
+    height: auto;
+    background-color: #3483FA;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+    padding: 10px 10px
+}

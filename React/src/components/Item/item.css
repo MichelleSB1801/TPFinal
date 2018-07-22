@@ -1,11 +1,11 @@
 .searchItem{
-    width: 80%;
+    width: 75%;
     height: auto;
-    background-color: white;
     display: flex;
     justify-content: center;
     margin-bottom: 1px;
-    padding: 16px 16px;   
+    padding: 16px 16px;
+    background-color: white    
 }
 .searchItem_img{
     width: 20%;

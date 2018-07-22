@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import './listaItems.css';
 import Item from '../Item/item'
+
+
+
+import './listaItems.css';
+
 
 const queryString = require('query-string');
 
@@ -16,17 +20,29 @@ class ListaItems extends Component {
   async componentDidMount () {
     const qs = queryString.parse(this.props.search)
 
-    console.log(2323, qs.search)
+    console.log('didmount', qs.search)
 		const products = await fetch('http://localhost:3001/api/items?q=' + qs.search)
 		const productsjson = await products.json()
     this.setState({
       products: productsjson
-    })
-    console.log(this.state.products.items)
-
+    })    
   }
 
+  async componentDidUpdate (prevProps) {
+      
+    const qs = queryString.parse(this.props.search)
 
+    if (this.props.search !== prevProps.search) {
+      console.log('update', qs.search)
+      const products = await fetch('http://localhost:3001/api/items?q=' + qs.search)
+      const productsjson = await products.json()
+      this.setState({
+        products: productsjson
+      })
+      console.log(productsjson);
+    }
+  }
+  
   render() {
 		let producto = this.state.products && this.state.products.items
     return ( 

@@ -18,7 +18,7 @@ self.getproduct = function (req, res) {
 
 
 	searchService.getproduct(id).then((result) => {
-		console.log(result.shipping + 'Holaaa soy el shipping')
+		console.log(result, 'Holaaa soy el shipping')
 
 		searchService.getproddescrip(id).then((data) => {
 			let precio = result.price
@@ -41,7 +41,7 @@ self.getproduct = function (req, res) {
 					'condition': result.condition,
 					'free_shipping': result.shipping.free_shipping,
 					'sold_quantity': result.sold_quantity,
-					'address': result.address.state_name,
+					'address': result.seller_address.state.name,
 					'description': data.plain_text
 				}
 			}

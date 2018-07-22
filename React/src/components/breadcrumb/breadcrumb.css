@@ -1,0 +1,23 @@
+.breadcrumb{
+    width: 77%;
+    margin: auto;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    font-size: 14px;
+    display: flex;
+
+}
+ul{
+    margin: 0 0;
+    padding: 0 0;
+    display: flex;
+    justify-content: flex-start;
+    list-style: none
+}
+li{
+    margin-right: 10px
+}
+
+ul:nth-last-child(1) li:nth-last-child(1) {
+    visibility: hidden;
+}

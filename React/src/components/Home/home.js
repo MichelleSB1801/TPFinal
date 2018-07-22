@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Buscador from '../buscador/buscador'
 
+import './home.css';
 
 
 class Home extends Component {
@@ -11,8 +12,8 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <Buscador />
+      <div className='home'>
+        <Buscador />	
       </div>
     );
   }

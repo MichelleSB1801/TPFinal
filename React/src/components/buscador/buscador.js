@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './buscador.css';
-import a from '../../img/ic_Search.png'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import icon from '../../img/ic_Search.png'
 
 class Buscador extends Component {
     constructor(props){
@@ -29,9 +29,9 @@ class Buscador extends Component {
             <input onChange={this.handleChange.bind(this)} type='text' placeholder="Nunca dejes de buscar" />
           </div>
 					<Link to={url}>
-          <div className='buttonBar'>
-             <img src={a} />
-          </div>
+            <div className='buttonBar'>
+              <img src={icon} />
+            </div>
 					</Link>
         </div>
       );

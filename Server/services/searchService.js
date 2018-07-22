@@ -44,21 +44,21 @@ self.getquery = function(query) {
             //console.log(result + 'hola soy un result')
         })
 
-        if (data.filters.values) {
+        if (data.filters[0]) {
+            console.log('hola soy una cat')
             data.filters[0].values[0].path_from_root.map((cat)=>{
                 categories.push(cat.name)    
             })
         }else{
+            //console.log(data.filters[0])
+
             let MaxObj = {
                 'name': '',
                 'results': 0
             }
-            console.log('else1')
             data.available_filters[0].values.map((cat)=>{
-                console.log(cat + 'else2')
                 
                 if (cat.results > MaxObj.results) {
-                    console.log('else3')
                     MaxObj = {
                         'name': cat.name,
                         'results': cat.results
@@ -85,6 +85,7 @@ self.getproduct = function (id) {
         rest.get('https://api.mercadolibre.com/items/' + id).on('complete', function(result) {
             resolve(result);
         })  
+        
     })
     return getproduct
 }
