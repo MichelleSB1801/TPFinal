@@ -9,7 +9,6 @@ self.getquery = function(query) {
 
         rest.get('https://api.mercadolibre.com/sites/MLA/search?q=' + query + '&limit=4').on('complete', function(data) {
         //console.log(JSON.stringify(result) + 'service')
-        
             const author = {
                 'name': 'Michelle',
                 'lastname': 'SB'
@@ -41,33 +40,35 @@ self.getquery = function(query) {
                     'address': result.address.state_name,
                     'free_shipping': result.shipping.free_shipping
                 })
-                //console.log(result + 'hola soy un result')
             })
-
-        
-        if (data.filters[0]) {
-            console.log('hola soy una cat')
-            data.filters[0].values[0].path_from_root.map((cat)=>{
-                categories.push(cat.name)    
-            })
-        }else{
-                //console.log(data.filters[0])
-
-            let MaxObj = {
-                'name': '',
-                    'results': 0
-            }
-            data.available_filters[0].values.map((cat)=>{        
-              if (cat.results > MaxObj.results) {
-                MaxObj = {
-              	  'name': cat.name,
-                	'results': cat.results
-                }
-              }
-                    
-            })
-                categories.push(MaxObj.name)
-        	}
+					if (data.filters[0]) {
+							console.log('hola soy una cat')
+							data.filters[0].values[0].path_from_root.map((cat)=>{
+									categories.push(cat.name)    
+							})
+					}else{
+							let MaxObj = {
+									'name': '',
+									'results': 0
+							}
+					
+					if (data.available_filters[0] == undefined) {
+						console.log('holaaa soy el if')
+						MaxObj.name = ''
+						categories.push(MaxObj.name)
+					}else{		
+						console.log('holaaa soy el else')
+						data.available_filters[0].values.map((cat)=>{        
+							if (cat.results > MaxObj.results) {
+								MaxObj = {
+									'name': cat.name,
+									'results': cat.results
+								}
+							}				
+						})
+						categories.push(MaxObj.name)
+					}	
+				}
     
         	resolve(producto);
       	}).on('fail', function(err) {

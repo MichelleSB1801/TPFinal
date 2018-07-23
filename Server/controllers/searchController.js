@@ -9,7 +9,9 @@ self.getquery = function(req, res) {
 		//console.log(result + 'lalala')
 			
 			res.json(result)
-    })
+    }).catch(function(err) {
+		console.log(err);
+	  });
     
 }
 
@@ -46,8 +48,12 @@ self.getproduct = function (req, res) {
 				}
 			}
 			res.json(producto)
-		})
-	})
+		}).catch(function(err) {
+			console.log(err);
+		  });
+	}).catch(function(err) {
+		console.log(err);
+	  });
 	
 }
 
@@ -58,7 +64,9 @@ self.getcategory = function(req, res) {
 			const categories = [result]	
 			console.log(result)		
 			res.json(categories)
-    })
+    }).catch(function(err) {
+		console.log(err);
+	  });
     
 }
 
