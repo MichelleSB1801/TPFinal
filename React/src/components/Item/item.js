@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './item.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import icon from '../../img/ic_shipping.png'
 
 
 class Item extends Component {
@@ -10,9 +11,8 @@ class Item extends Component {
 
 
   render() {
-    console.log(this.props.item.picture)
     const url = "/items/" + this.props.item.id
-
+    const shipp = this.props.item.free_shipping == true
     return ( 
       <Link to={url}>
 
@@ -23,8 +23,10 @@ class Item extends Component {
             <div className='searchItem_text'>
               <div className='searchItem_price'>
                 <span>$ {this.props.item.price.amount}</span>
-                <span>{this.props.item.free_shipping}</span>
-              </div>
+                {shipp &&
+                  <img className='shipp' src={icon} />
+                }
+                </div>
               <div className='searchItem_desc'>
               <span>{this.props.item.title}</span>
               </div>

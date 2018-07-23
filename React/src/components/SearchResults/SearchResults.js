@@ -18,10 +18,9 @@ class SearchResults extends Component {
   
 
   render() {
-      console.log(123)
-      console.log(this.props)
+    
       const data = this.props.location.search
-      console.log(data)
+      
     return (
       <div className="Search_results">
         <Buscador />

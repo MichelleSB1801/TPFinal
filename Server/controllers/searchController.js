@@ -42,13 +42,25 @@ self.getproduct = function (req, res) {
 					'free_shipping': result.shipping.free_shipping,
 					'sold_quantity': result.sold_quantity,
 					'address': result.seller_address.state.name,
-					'description': data.plain_text
+					'description': data.plain_text,
+					'category_id': result.category_id
 				}
 			}
 			res.json(producto)
 		})
 	})
 	
+}
+
+self.getcategory = function(req, res) {
+    const id = req.params.id; //para levantar query params siempre se usa esto en node
+
+	searchService.getcategory(id).then((result) => {
+			const categories = [result]	
+			console.log(result)		
+			res.json(categories)
+    })
+    
 }
 
 

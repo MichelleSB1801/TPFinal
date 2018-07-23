@@ -28,7 +28,7 @@
 }
 .searchItem_price{
     display: flex;
-    align-content: center;
+    align-items: center;
     font-size: 24px;
     padding-top: 16px;
     padding-bottom: 32px;
@@ -36,7 +36,11 @@
 .searchItem_desc{
     font-size: 18px;
 }
-
+.shipp{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px
+}
 .searchItem_location{
     width: 20%;
     font-size: 12px;

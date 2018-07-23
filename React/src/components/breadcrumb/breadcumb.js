@@ -13,17 +13,29 @@ class Breadcrumb extends Component {
   }
  
   async componentDidMount () {
-    const qs = queryString.parse(this.props.search)
 
-    
-		const cats = await fetch('http://localhost:3001/api/items?q=' + qs.search)
-		const catsjson = await cats.json()
-		
-		this.setState({
-      categories: catsjson.categories
-		})    
-		
-		console.log('didmount', this.state.categories)
+    if(this.props.search){
+      const qs = queryString.parse(this.props.search)
+      const itemsearch = 'items?q=' + qs.search
+
+      
+      const cats = await fetch('http://localhost:3001/api/' + itemsearch)
+      const catsjson = await cats.json()
+      
+      this.setState({
+        categories: catsjson.categories
+      })    
+    }else{
+      const id = this.props.info.category_id
+      const catsearch = 'categories/' + id
+
+      const cats = await fetch('http://localhost:3001/api/' + catsearch)
+      const catsjson = await cats.json()
+  
+      this.setState({
+        categories: catsjson[0]
+      })      
+    }
 
   }
   
@@ -34,10 +46,9 @@ class Breadcrumb extends Component {
 			  {producto	&&
 				  <React.Fragment>
 					  {this.state.categories.map((info,i) => {
-						  console.log(info)
 						  return (
-							  <ul>
-                  <li key={i}>{info}</li>
+							  <ul key={i} >
+                  <li>{info}</li>
                   <li className='separador'> > </li>
                 </ul>
               )

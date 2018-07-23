@@ -101,7 +101,22 @@ self.getproddescrip = function (id) {
     return getproddescrip
 }
 
+self.getcategory = function (id) {
+    const getcategory = new Promise((resolve, reject) => {
+        //restler.get/post/put/delete(url).on('complete') es como el .done
+        rest.get('https://api.mercadolibre.com/categories/' + id).on('complete', function(result) {
+            const categ = []
 
+            result.path_from_root.map((cat)=>{
+                categ.push(cat.name)    
+            })
+
+            resolve(categ);
+        })  
+        
+    })
+    return getcategory
+}
 
 
       

@@ -13,5 +13,7 @@ router.get('/api/items/:id', searchController.getproduct)
 
 router.get('/api/items/:id/description', searchController.getproduct)
 
+router.get('/api/categories/:id', searchController.getcategory)
+
 
 module.exports = router;

@@ -19,9 +19,9 @@ class ListaItems extends Component {
  
   async componentDidMount () {
     const qs = queryString.parse(this.props.search)
+    const itemsearch = 'items?q=' + qs.search
 
-    console.log('didmount', qs.search)
-		const products = await fetch('http://localhost:3001/api/items?q=' + qs.search)
+		const products = await fetch('http://localhost:3001/api/' + itemsearch)
 		const productsjson = await products.json()
     this.setState({
       products: productsjson
@@ -33,13 +33,11 @@ class ListaItems extends Component {
     const qs = queryString.parse(this.props.search)
 
     if (this.props.search !== prevProps.search) {
-      console.log('update', qs.search)
       const products = await fetch('http://localhost:3001/api/items?q=' + qs.search)
       const productsjson = await products.json()
       this.setState({
         products: productsjson
       })
-      console.log(productsjson);
     }
   }
   
@@ -50,7 +48,6 @@ class ListaItems extends Component {
 			{producto	&&
 				<React.Fragment>
 					{this.state.products.items.map((info,i) => {
-						console.log(info)
 						return (
 							<Item key={i} item={info} />
 						)
