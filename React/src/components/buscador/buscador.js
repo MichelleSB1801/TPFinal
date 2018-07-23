@@ -14,7 +14,14 @@ class Buscador extends Component {
         //redirect: false,
       }
     }
-	
+  
+    componentDidUpdate() {
+      if (this.state.redirect) {
+        this.setState({
+          redirect:false,
+        })
+      }
+    }
 		handleChange(e) {
 			const value = e.target.value
 
@@ -23,14 +30,14 @@ class Buscador extends Component {
 			})
     }
     
-    // handleKeyPress(e){
-    //   if(e.key==='Enter'){
-    //     console.log('funciona')
-    //     this.setState({
-    //       redirect:true,
-    //     })
-    //   }
-    // }
+    handleKeyPress(e){
+      if(e.key==='Enter'){
+        console.log('funciona')
+        this.setState({
+          redirect:true,
+        })
+      }
+    }
 
 
     render() {
@@ -46,14 +53,14 @@ class Buscador extends Component {
           <div className='inputBar'>
             <input 
               onChange={this.handleChange.bind(this)} 
-              /*onKeyPress={this.handleKeyPress.bind(this)}*/ 
+              onKeyPress={this.handleKeyPress.bind(this)} 
               type='text' placeholder="Nunca dejes de buscar" 
             />
           </div>
-          {/*{this.state.redirect == true &&
+          {this.state.redirect == true &&
             <Redirect to={url}>
             </Redirect>
-          }*/}
+          }
 					<Link to={url}>
             <div className='buttonBar'>
               <img src={icon} />
