@@ -18,7 +18,6 @@ self.getproduct = function (req, res) {
 
 
 	searchService.getproduct(id).then((result) => {
-		console.log(result, 'Holaaa soy el shipping')
 
 		searchService.getproddescrip(id).then((data) => {
 			let precio = result.price

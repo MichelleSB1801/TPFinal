@@ -10,69 +10,69 @@ self.getquery = function(query) {
         rest.get('https://api.mercadolibre.com/sites/MLA/search?q=' + query + '&limit=4').on('complete', function(data) {
         //console.log(JSON.stringify(result) + 'service')
         
-        const author = {
-			'name': 'Michelle',
-			'lastname': 'SB'
-        }
-        const categories = []
-        const items = []        
-        
-        const producto = {
-            author,
-            categories,
-            items
-        }
-
-        data.results.map((result)=>{
-            let precio = result.price
-            let preciored= Math.floor(precio)
-            let decimales = ((precio - preciored)*100)
+            const author = {
+                'name': 'Michelle',
+                'lastname': 'SB'
+            }
+            const categories = []
+            const items = []        
             
-            items.push({
-                'id': result.id,
-				'title': result.title,
-				'price': {
-					'currency': result.currency_id,
-					'amount': preciored,
-					'decimals': decimales
-				},
-				'picture': result.thumbnail,
-                'condition': result.condition,
-                'address': result.address.state_name,
-				'free_shipping': result.shipping.free_shipping
-            })
-            //console.log(result + 'hola soy un result')
-        })
+            const producto = {
+                author,
+                categories,
+                items
+            }
 
+            data.results.map((result)=>{
+                let precio = result.price
+                let preciored= Math.floor(precio)
+                let decimales = ((precio - preciored)*100)
+                
+                items.push({
+                    'id': result.id,
+                    'title': result.title,
+                    'price': {
+                        'currency': result.currency_id,
+                        'amount': preciored,
+                        'decimals': decimales
+                    },
+                    'picture': result.thumbnail,
+                    'condition': result.condition,
+                    'address': result.address.state_name,
+                    'free_shipping': result.shipping.free_shipping
+                })
+                //console.log(result + 'hola soy un result')
+            })
+
+        
         if (data.filters[0]) {
             console.log('hola soy una cat')
             data.filters[0].values[0].path_from_root.map((cat)=>{
                 categories.push(cat.name)    
             })
         }else{
-            //console.log(data.filters[0])
+                //console.log(data.filters[0])
 
             let MaxObj = {
                 'name': '',
-                'results': 0
+                    'results': 0
             }
-            data.available_filters[0].values.map((cat)=>{
-                
-                if (cat.results > MaxObj.results) {
-                    MaxObj = {
-                        'name': cat.name,
-                        'results': cat.results
-                    }
+            data.available_filters[0].values.map((cat)=>{        
+              if (cat.results > MaxObj.results) {
+                MaxObj = {
+              	  'name': cat.name,
+                	'results': cat.results
                 }
-                
+              }
+                    
             })
-            categories.push(MaxObj.name)
-        }
-                
-        
-
-        resolve(producto);
-        })  
+                categories.push(MaxObj.name)
+        	}
+    
+        	resolve(producto);
+      	}).on('fail', function(err) {
+        	reject(err)
+      	})  
     })
     return queryPromise      
 }
@@ -84,7 +84,9 @@ self.getproduct = function (id) {
         //restler.get/post/put/delete(url).on('complete') es como el .done
         rest.get('https://api.mercadolibre.com/items/' + id).on('complete', function(result) {
             resolve(result);
-        })  
+        }).on('fail', function(err) {
+					reject(err)
+				})  
         
     })
     return getproduct
@@ -96,7 +98,9 @@ self.getproddescrip = function (id) {
         //restler.get/post/put/delete(url).on('complete') es como el .done
         rest.get('https://api.mercadolibre.com/items/' + id + '/description').on('complete', function(result) {
             resolve(result);
-        })  
+        }).on('fail', function(err) {
+					reject(err)
+				})  
     })
     return getproddescrip
 }
@@ -112,7 +116,9 @@ self.getcategory = function (id) {
             })
 
             resolve(categ);
-        })  
+        }).on('fail', function(err) {
+					reject(err)
+				})  
         
     })
     return getcategory

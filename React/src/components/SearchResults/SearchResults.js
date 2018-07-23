@@ -19,7 +19,7 @@ class SearchResults extends Component {
 
   render() {
     
-      const data = this.props.location.search
+    const data = this.props.location.search
       
     return (
       <div className="Search_results">

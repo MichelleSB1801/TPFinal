@@ -36,6 +36,9 @@
 .searchItem_desc{
     font-size: 18px;
 }
+sup{
+    font-size: 45%
+}
 .shipp{
     width: 20px;
     height: 20px;

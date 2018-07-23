@@ -38,6 +38,24 @@ class Breadcrumb extends Component {
     }
 
   }
+
+  async componentDidUpdate (prevProps) {
+
+    if (this.props.search !== prevProps.search) {
+      const qs = queryString.parse(this.props.search)
+      const itemsearch = 'items?q=' + qs.search
+
+      
+      const cats = await fetch('http://localhost:3001/api/' + itemsearch)
+      const catsjson = await cats.json()
+      
+      this.setState({
+        categories: catsjson.categories
+      })
+    }
+  }
+
+
   
   render() {
 		let producto = this.state.categories

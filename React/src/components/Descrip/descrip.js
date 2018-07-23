@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './descrip.css';
+import renderHTML from 'react-render-html'
 
 
 
@@ -11,21 +12,6 @@ class Descrip extends Component {
 				price: [],
     }
 
-    
-		let unformatted_decimals = this.props.info.price.decimals.toString().split('.');
-		
-		let decimals = formatDecimals(unformatted_decimals);
-    function formatDecimals() {
-        if (!parseInt(unformatted_decimals[1])) {
-            return '00';
-        } else if (parseInt(unformatted_decimals[1]) < 10) {
-            return parseInt(unformatted_decimals[1]) * 10;
-        } else {
-            return parseInt(unformatted_decimals[1]);
-        }    
-		} 
-
-
     if(this.props.info.condition == 'new'){
         this.setState={
             estado: 'Nuevo'
@@ -35,12 +21,20 @@ class Descrip extends Component {
             estado: 'Usado'
         }
     }
-          
-
-
 }
 
-
+formatCurrency (price) {
+	let html = '$ '
+	const newprice = Number(price) || 0
+	if (!Number.isNaN(newprice)) {
+			html += newprice.toFixed(2).replace(/\./g, ",").replace(/(\d)(?=(\d{3})+,)/g, "$1.")
+			html = html.replace(/,/g, '<sup>')
+			html += '</sup>'
+	} else {
+			html += price
+	}
+	return renderHTML(html)
+}
 
     
 
@@ -60,7 +54,7 @@ class Descrip extends Component {
             <div className='descrip_info'>
                 <span className='descrip_quantity'>{this.state.estado} - {this.props.info.sold_quantity} vendidos</span>
                 <span className='descrip_title'><b>{this.props.info.title}</b></span>
-                <span className='descrip_price'>$ {this.props.info.price.amount}</span>
+                <span className='descrip_price'>{this.formatCurrency(this.props.info.price.amount)}</span>
                 <div className='buy_button'>
                     Comprar
                 </div>
