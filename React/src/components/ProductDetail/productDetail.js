@@ -12,45 +12,41 @@ class ProductDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            product: [],
-            
+            product: []
         }
     }
 
     async componentDidMount () {
         const qs = this.props.match.params.id
+        console.log(qs, 1)
         const products = await fetch('http://localhost:3001/api/items/' + qs)
         const productsjson = await products.json()
-        console.log('hola', this.props.location)
         this.setState({
-          product: productsjson
-        })    
+          product: productsjson.item
+        })
+        console.log(this.state.product)    
       }
 
     async componentDidUpdate (prevProps) {
       
       const qs = this.props.match.params.id
-    
+      console.log(qs, 2)
       if (this.props.match.params.id !== prevProps.match.params.id) {
-        console.log('update', qs)
-        console.log('jaja', prevProps.match.params)
         const products = await fetch('http://localhost:3001/api/items/' + qs)
         const productsjson = await products.json()
-        console.log('hola', this.props.location)
         this.setState({
-          product: productsjson
+          product: productsjson.item
         })
-        console.log(productsjson);
       }
     }
 
 
 
   render() {
-    console.log(this.state.product, 'holaaa')
-    const infoProd = this.state.product.item
-    let producto = this.state.product && this.state.product.item
-
+    const infoProd = this.state.product
+    const infoCat = this.state.product.category
+    let producto = this.state.product
+    console.log(infoProd.picture, 'Hola soy el pre prop')
     return (
       
       <div className="Product_Detail">
@@ -58,8 +54,8 @@ class ProductDetail extends Component {
         
         {producto	&&
         	<React.Fragment>
-            <Breadcrumb info={infoProd} />
-            <Descrip info={infoProd}/>
+            <Breadcrumb search={infoCat} />
+            <Descrip info={infoProd} />
           </React.Fragment>
         }
       </div>

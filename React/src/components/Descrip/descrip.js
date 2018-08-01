@@ -12,7 +12,7 @@ class Descrip extends Component {
 				price: [],
     }
 
-    if(this.props.info.condition == 'new'){
+    if(this.props.condition == 'new'){
         this.setState={
             estado: 'Nuevo'
         }
@@ -20,9 +20,9 @@ class Descrip extends Component {
         this.setState={
             estado: 'Usado'
         }
+
     }
 }
-
 formatCurrency (price) {
 	let html = '$ '
 	const newprice = Number(price) || 0
@@ -40,25 +40,25 @@ formatCurrency (price) {
 
 
   render() {
-      console.log(this.props.info.picture[0].url, 'Hola soy un prop')
+      console.log(this.props.info.picture[0].url, 'hola soy los props')
     return ( 
 
         <div className = "ItemDescrip">
-            <div className = 'descrip_img_txt'>
-                <img src={this.props.info.picture[0].url}/>
+            {/*<div className = 'descrip_img_txt'>
+                <img src={this.props.picture[0].url}/>
                 <div className = 'descrip_txt'>
                     <h2>Descripcion del Producto</h2>
-                    <p>{this.props.info.description}</p>
+                    <p>{this.props.description}</p>
                 </div>
             </div>
             <div className='descrip_info'>
-                <span className='descrip_quantity'>{this.state.estado} - {this.props.info.sold_quantity} vendidos</span>
-                <span className='descrip_title'><b>{this.props.info.title}</b></span>
-                <span className='descrip_price'>{this.formatCurrency(this.props.info.price.amount)}</span>
+                <span className='descrip_quantity'>{this.state.estado} - {this.props.sold_quantity} vendidos</span>
+                <span className='descrip_title'><b>{this.props.title}</b></span>
+                <span className='descrip_price'>{this.formatCurrency(this.props.price.amount)}</span>
                 <div className='buy_button'>
                     Comprar
                 </div>
-            </div>
+    </div>*/}
         </div>
       
     );

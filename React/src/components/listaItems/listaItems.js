@@ -1,53 +1,23 @@
 import React, { Component } from 'react';
 import Item from '../Item/item'
 
-
-
 import './listaItems.css';
 
-
-const queryString = require('query-string');
 
 class ListaItems extends Component {
   constructor(props){
     super(props)
-    this.state = {
-        products: [],
-    }
 
   }
  
-  async componentDidMount () {
-    const qs = queryString.parse(this.props.search)
-    const itemsearch = 'items?q=' + qs.search
-
-		const products = await fetch('http://localhost:3001/api/' + itemsearch)
-		const productsjson = await products.json()
-    this.setState({
-      products: productsjson
-    })    
-  }
-
-  async componentDidUpdate (prevProps) {
-      
-    const qs = queryString.parse(this.props.search)
-
-    if (this.props.search !== prevProps.search) {
-      const products = await fetch('http://localhost:3001/api/items?q=' + qs.search)
-      const productsjson = await products.json()
-      this.setState({
-        products: productsjson
-      })
-    }
-  }
   
   render() {
-		let producto = this.state.products && this.state.products.items
+		let producto = this.props && this.props.search
     return ( 
 			<div className = "list_container">
 			{producto	&&
 				<React.Fragment>
-					{this.state.products.items.map((info,i) => {
+					{this.props.search.map((info,i) => {
 						return (
 							<Item key={i} item={info} />
 						)

@@ -32,7 +32,6 @@ class Buscador extends Component {
     
     handleKeyPress(e){
       if(e.key==='Enter'){
-        console.log('funciona')
         this.setState({
           redirect:true,
         })
