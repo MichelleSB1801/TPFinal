@@ -1,5 +1,6 @@
 let self = {}
 const searchService = require('../services/searchService')
+var currencyFormatter = require('currency-formatter');
 
 
 self.getquery = function(req, res) {
@@ -17,7 +18,6 @@ self.getquery = function(req, res) {
 
 self.getproduct = function (req, res) {
 	const id = req.params.id
-	console.log(id, 'hola getproduct')
 
 	searchService.getproduct(id).then((result) => {
 
@@ -25,10 +25,20 @@ self.getproduct = function (req, res) {
 			const cat = result.category_id
 			
 			searchService.getcategory(cat).then((info) => {
-				
+				let estado = ''
+				if (result.condition == 'new') {
+					estado += 'Nuevo'
+				}else{
+					estado += 'Usado'
+				}
 				let precio = result.price
 				let preciored= Math.floor(precio)
-				let decimales = ((precio - preciored)*100)
+				let decimales = ((precio - preciored).toFixed(2))*100
+				if (decimales == 0) {
+					decimales += '0'
+				}
+
+				console.log(preciored)
 				const producto = {
 					'author': {
 						'name': 'Michelle',
@@ -39,11 +49,14 @@ self.getproduct = function (req, res) {
 						'title': result.title,
 						'price': {
 							'currency': result.currency_id,
-							'amount': preciored,
+							'amount': currencyFormatter.format(preciored, {
+								thousand: '.',
+								decimalDigits: 0,
+							  }),
 							'decimals': decimales,
 						},
-						'picture': result.pictures,
-						'condition': result.condition,
+						'picture': result.pictures[0].url,
+						'condition': estado,
 						'free_shipping': result.shipping.free_shipping,
 						'sold_quantity': result.sold_quantity,
 						'address': result.seller_address.state.name,
@@ -52,6 +65,8 @@ self.getproduct = function (req, res) {
 					}
 				}
 				res.json(producto)
+
+				console.log(producto.price.amount)
 			}).catch(function(err) {
 				console.log(err);
 			  });

@@ -5,11 +5,6 @@ import './listaItems.css';
 
 
 class ListaItems extends Component {
-  constructor(props){
-    super(props)
-
-  }
- 
   
   render() {
 		let producto = this.props && this.props.search

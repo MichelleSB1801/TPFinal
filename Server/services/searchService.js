@@ -1,6 +1,7 @@
 let self = {};
 
 const rest = require('restler')
+var currencyFormatter = require('currency-formatter');
 
 
 self.getquery = function(query) {
@@ -24,15 +25,24 @@ self.getquery = function(query) {
 		
       data.results.map((result)=>{
         let precio = result.price
-        let preciored= Math.floor(precio)
-        let decimales = ((precio - preciored)*100)
-                
+        let preciored = Math.floor(precio)
+        let decimales = ((precio - preciored).toFixed(2))*100
+        console.log(precio, 'precio',preciored,'preciored', decimales, 'hola soy el decimal')
+        if (decimales == 0) {
+					decimales += '0'
+        }
+        
+        
+
         items.push({
           'id': result.id,
           'title': result.title,
   	      'price': {
           	'currency': result.currency_id,
-            'amount': preciored,
+            'amount': currencyFormatter.format(preciored, {
+              thousand: '.',
+              decimalDigits: 0,
+            }),
             'decimals': decimales
           },
           'picture': result.thumbnail,

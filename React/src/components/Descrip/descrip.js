@@ -5,60 +5,29 @@ import renderHTML from 'react-render-html'
 
 
 class Descrip extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-				estado: 'Nuevo',
-				price: [],
-    }
-
-    if(this.props.condition == 'new'){
-        this.setState={
-            estado: 'Nuevo'
-        }
-    }else{
-        this.setState={
-            estado: 'Usado'
-        }
-
-    }
-}
-formatCurrency (price) {
-	let html = '$ '
-	const newprice = Number(price) || 0
-	if (!Number.isNaN(newprice)) {
-			html += newprice.toFixed(2).replace(/\./g, ",").replace(/(\d)(?=(\d{3})+,)/g, "$1.")
-			html = html.replace(/,/g, '<sup>')
-			html += '</sup>'
-	} else {
-			html += price
-	}
-	return renderHTML(html)
-}
-
-    
-
 
   render() {
-      console.log(this.props.info.picture[0].url, 'hola soy los props')
+      console.log(this.props, 'hola soy los props')
+      const props = this.props.info.product
+      const render = this.props.info.render;
     return ( 
 
         <div className = "ItemDescrip">
-            {/*<div className = 'descrip_img_txt'>
-                <img src={this.props.picture[0].url}/>
+            <div className = 'descrip_img_txt'>
+                <img src={render ? props.picture : ''}/>
                 <div className = 'descrip_txt'>
                     <h2>Descripcion del Producto</h2>
-                    <p>{this.props.description}</p>
+                    <p>{render ? props.description : ''}</p>
                 </div>
             </div>
             <div className='descrip_info'>
-                <span className='descrip_quantity'>{this.state.estado} - {this.props.sold_quantity} vendidos</span>
-                <span className='descrip_title'><b>{this.props.title}</b></span>
-                <span className='descrip_price'>{this.formatCurrency(this.props.price.amount)}</span>
+                <span className='descrip_quantity'>{render ? props.condition : ''} - {render ? props.sold_quantity : ''} vendidos</span>
+                <span className='descrip_title'><b>{render ? props.title : ''}</b></span>
+                <span className='descrip_price'>$ {render ? props.price.amount : ''}<sup>{render ? props.price.decimals : ''}</sup></span>
                 <div className='buy_button'>
                     Comprar
                 </div>
-    </div>*/}
+    </div>
         </div>
       
     );

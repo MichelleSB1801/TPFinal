@@ -7,40 +7,23 @@ import renderHTML from 'react-render-html'
 
 
 class Item extends Component {
-  constructor(props){
-    super(props)
-  
-  }
-
-
-
-  formatCurrency (price) {
-    let html = '$ '
-    const newprice = Number(price) || 0
-    if (!Number.isNaN(newprice)) {
-        html += newprice.toFixed(2).replace(/\./g, ",").replace(/(\d)(?=(\d{3})+,)/g, "$1.")
-        html = html.replace(/,/g, '<sup>')
-        html += '</sup>'
-    } else {
-        html += price
-    }
-    return renderHTML(html)
-  }
 
 
   render() {
-    const url = "/items/" + this.props.item.id
+    const props = this.props.item
+    const url = "/items/" + props.id
     const shipp = this.props.item.free_shipping == true
+    console.log(props.price.decimals)
     return ( 
       <Link to={url}>
 
         <div className= 'searchItem'>
             <div className = 'searchItem_img'>
-              <img src={this.props.item.picture}/>
+              <img src={props.picture}/>
             </div>
             <div className='searchItem_text'>
               <div className='searchItem_price'>
-                <span>{this.formatCurrency(this.props.item.price.amount)}</span>
+                <span>${props.price.amount}<sup>{props.price.decimals}</sup></span>
                 {shipp &&
                   <img className='shipp' src={icon} />
                 }
